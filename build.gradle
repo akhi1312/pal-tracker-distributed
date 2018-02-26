@@ -47,6 +47,4 @@ subprojects {
         springCloudDependenciesVersion = "Edgware.RELEASE"
         springCloudServicesVersion = "1.6.0.RELEASE"
     }
-
-
 }
