@@ -5,8 +5,6 @@ buildscript {
         springBootVersion = "1.5.3.RELEASE"
         springVersion = "4.3.8.RELEASE"
         mysqlVersion = "6.0.6"
-        springCloudDependenciesVersion = "Edgware.RELEASE"
-        springCloudServicesVersion = "1.6.0.RELEASE"
     }
 
     repositories {
@@ -45,6 +43,10 @@ subprojects {
         testCompile "org.assertj:assertj-core:3.8.0"
     }
 
+    ext {
+        springCloudDependenciesVersion = "Edgware.RELEASE"
+        springCloudServicesVersion = "1.6.0.RELEASE"
+    }
 
 
 }
