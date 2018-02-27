@@ -23,6 +23,14 @@ resources:
     access_key_id: {{aws-access-key-id}}
     secret_access_key: {{aws-secret-access-key}}
 
+- name: eureka-artifacts
+  type: s3
+  source:
+    bucket: {{aws-bucket}}
+    regexp: pal-tracker/eureka-server-(.*).jar
+    access_key_id: {{aws-access-key-id}}
+    secret_access_key: {{aws-secret-access-key}}
+
 - name: backlog-artifacts
   type: s3
   source:
