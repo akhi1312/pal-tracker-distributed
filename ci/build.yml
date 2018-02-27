@@ -34,5 +34,6 @@ run:
       cp applications/backlog-server/build/libs/backlog-server.jar ../build-output/backlog-server-`cat ../version/number`.jar
       cp applications/registration-server/build/libs/registration-server.jar ../build-output/registration-server-`cat ../version/number`.jar
       cp applications/timesheets-server/build/libs/timesheets-server.jar ../build-output/timesheets-server-`cat ../version/number`.jar
+      cp platform-services/eureka-server/build/libs/eureka-server.jar ../build-output/eureka-server-`cat ../version/number`.jar
 
       service mysql stop

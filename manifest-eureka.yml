@@ -1,5 +1,5 @@
 applications:
-- name: tracker-enreka-server
+- name: tracker-enreka
   path: ./platform-services/eureka-server/build/libs/eureka-server.jar
   host: eureka-pal-rn
   memory: 1G

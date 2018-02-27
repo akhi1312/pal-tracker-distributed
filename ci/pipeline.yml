@@ -80,9 +80,25 @@ jobs:
   - put: timesheets-artifacts
     params:
       file: build-output/timesheets*.jar
+  - put: eureka-artifacts
+    params:
+      file: build-output/eureka*.jar
   - put: version
     params:
       file: version/number
+
+- name: deploy-eureka
+  plan:
+  - get: pal-tracker
+    passed: [build]
+    trigger: true
+  - get: eureka-artifacts
+    trigger: false
+  - put: cf
+    params:
+      manifest: pal-tracker/manifest-eureka.yml
+      path: eureka-artifacts/eureka-server*.jar
+      current_app_name: tracker-eureka
 
 - name: deploy-allocations
   plan:
