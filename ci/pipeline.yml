@@ -23,13 +23,13 @@ resources:
     access_key_id: {{aws-access-key-id}}
     secret_access_key: {{aws-secret-access-key}}
 
-- name: eureka-artifacts
-  type: s3
-  source:
-    bucket: {{aws-bucket}}
-    regexp: pal-tracker/eureka-server-(.*).jar
-    access_key_id: {{aws-access-key-id}}
-    secret_access_key: {{aws-secret-access-key}}
+#- name: eureka-artifacts
+#  type: s3
+#  source:
+#    bucket: {{aws-bucket}}
+#    regexp: pal-tracker/eureka-server-(.*).jar
+#    access_key_id: {{aws-access-key-id}}
+#    secret_access_key: {{aws-secret-access-key}}
 
 - name: backlog-artifacts
   type: s3
@@ -88,30 +88,30 @@ jobs:
   - put: timesheets-artifacts
     params:
       file: build-output/timesheets*.jar
-  - put: eureka-artifacts
-    params:
-      file: build-output/eureka*.jar
+#  - put: eureka-artifacts
+#    params:
+#      file: build-output/eureka*.jar
   - put: version
     params:
       file: version/number
 
-- name: deploy-eureka
-  plan:
-  - get: pal-tracker
-    passed: [build]
-    trigger: true
-  - get: eureka-artifacts
-    trigger: false
-  - put: cf
-    params:
-      manifest: pal-tracker/manifest-eureka.yml
-      path: eureka-artifacts/eureka-server*.jar
-      current_app_name: tracker-eureka
+#- name: deploy-eureka
+#  plan:
+#  - get: pal-tracker
+#    passed: [build]
+#    trigger: true
+#  - get: eureka-artifacts
+#    trigger: false
+#  - put: cf
+#    params:
+#      manifest: pal-tracker/manifest-eureka.yml
+#      path: eureka-artifacts/eureka-server*.jar
+#      current_app_name: tracker-eureka
 
 - name: deploy-allocations
   plan:
   - get: pal-tracker
-    passed: [deploy-eureka]
+    passed: [build]
     trigger: true
   - get: allocations-artifacts
     trigger: false
@@ -124,7 +124,7 @@ jobs:
 - name: deploy-backlog
   plan:
   - get: pal-tracker
-    passed: [deploy-eureka]
+    passed: [build]
     trigger: true
   - get: backlog-artifacts
     trigger: false
@@ -137,7 +137,7 @@ jobs:
 - name: deploy-registration
   plan:
   - get: pal-tracker
-    passed: [deploy-eureka]
+    passed: [build]
     trigger: true
   - get: registration-artifacts
     trigger: false
@@ -150,7 +150,7 @@ jobs:
 - name: deploy-timesheets
   plan:
   - get: pal-tracker
-    passed: [deploy-eureka]
+    passed: [build]
     trigger: true
   - get: timesheets-artifacts
     trigger: false
