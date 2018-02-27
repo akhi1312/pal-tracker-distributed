@@ -111,7 +111,7 @@ jobs:
 - name: deploy-allocations
   plan:
   - get: pal-tracker
-    passed: [build, deploy-eureka]
+    passed: [deploy-eureka]
     trigger: true
   - get: allocations-artifacts
     trigger: false
@@ -124,7 +124,7 @@ jobs:
 - name: deploy-backlog
   plan:
   - get: pal-tracker
-    passed: [build, deploy-eureka]
+    passed: [deploy-eureka]
     trigger: true
   - get: backlog-artifacts
     trigger: false
@@ -137,7 +137,7 @@ jobs:
 - name: deploy-registration
   plan:
   - get: pal-tracker
-    passed: [build, deploy-eureka]
+    passed: [deploy-eureka]
     trigger: true
   - get: registration-artifacts
     trigger: false
@@ -150,7 +150,7 @@ jobs:
 - name: deploy-timesheets
   plan:
   - get: pal-tracker
-    passed: [build, deploy-eureka]
+    passed: [deploy-eureka]
     trigger: true
   - get: timesheets-artifacts
     trigger: false
