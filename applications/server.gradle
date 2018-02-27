@@ -14,6 +14,8 @@ dependencies {
 
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
     testCompile project(":components:test-support")
+    compile "org.springframework.cloud:spring-cloud-starter-oauth2"
+    compile "io.pivotal.spring.cloud:spring-cloud-sso-connector:$springCloudSsoVersion"
 }
 
 dependencyManagement {
@@ -21,6 +23,12 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudDependenciesVersion"
         mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:$springCloudServicesVersion"
     }
-
-
 }
+
+bootRun.environment([
+        "APPLICATION_OAUTH_ENABLED": true,
+        "SECURITY_OAUTH2_CLIENT_CLIENT_ID": "tracker-client",
+        "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": "supersecret",
+        "SECURITY_USER_NAME": "actuator",
+        "SECURITY_USER_PASSWORD": "operations4red"
+])
